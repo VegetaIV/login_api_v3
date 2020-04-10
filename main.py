@@ -47,7 +47,9 @@ def start_server(host, port):
 
 
 def main():
-    print("__login-api__")
+    print()
+    print("__Hoang Thanh Lam__")
+    print()
     loop = ZMQEventLoop()
     asyncio.set_event_loop(loop)
 
