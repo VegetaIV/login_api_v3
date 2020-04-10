@@ -74,9 +74,16 @@ class RouterHandler(object):
         check = await _redis.check(id)
         if check:
             user = await _redis.cache_get_user(id)
-            return json_response(
-                user
-            )
+            if user:
+                return json_response(
+                    user
+                )
+            else:
+                return json_response({
+                    "status": "Failure",
+                    "detail": "Do not exists user in cache"
+                })
+
         else:
             return json_response({
                 "status": "Failure",

@@ -14,6 +14,10 @@ async def cache_set_user(user_id, username, mail):
 async def cache_get_user(user_id):
     username = cache.get("username")
     mail = cache.get("mail")
+
+    if username is None:
+        return None
+
     body = {
         "id": user_id,
         "username": str(username, 'utf-8'),
