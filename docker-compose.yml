@@ -2,12 +2,17 @@ version: '2.1'
 
 services:
   login:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    image: login
-    container_name: login
+    build: .
+    image: login_api
+    container_name: login_api
+    volumes:
+      - .:/login
     ports:
       - '8096:8096'
+    command: |
+      bash -c "
+        login \
+          -B localhost:8096 \
+          -vv
   redis:
     image: 'redis:latest'

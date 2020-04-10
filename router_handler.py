@@ -2,7 +2,7 @@ from aiohttp.web import json_response
 from json.decoder import JSONDecodeError
 from errors import *
 import elastic
-import redisconnect
+import _redis
 import uuid
 
 
@@ -71,9 +71,9 @@ class RouterHandler(object):
         except:
             raise ApiBadRequest("'id' parameter is required")
 
-        check = await redisconnect.check(id)
+        check = await _redis.check(id)
         if check:
-            user = await redisconnect.cache_get_user(id)
+            user = await _redis.cache_get_user(id)
             return json_response(
                 user
             )
@@ -92,7 +92,7 @@ class RouterHandler(object):
         username = body.get('username')
         email = body.get('email')
 
-        await redisconnect.cache_set_user(user_id, username, email)
+        await _redis.cache_set_user(user_id, username, email)
         return json_response({
             "status": "Saved in redis",
             "id": user_id
