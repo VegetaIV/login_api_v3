@@ -10,6 +10,8 @@ RUN pip3 install \
     redis \
     aiohttp
 
+COPY . .
+
 ENV PATH $PATH:/login/bin
 
 CMD ['login']
