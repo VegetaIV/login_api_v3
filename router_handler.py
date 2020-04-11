@@ -22,9 +22,8 @@ class RouterHandler(object):
                 "status": "Failure",
                 "detail": "User already existed"
             })
-        else:
-            user_id = str(uuid.uuid4())
 
+        user_id = str(uuid.uuid4())
         await elastic.create_user(
             username=username,
             mail=body.get('email'),
@@ -57,15 +56,10 @@ class RouterHandler(object):
                 "detail": "Wrong password"
             })
 
-        # await redisconnect.cache_set_user(username, password)
         user_id = user.get('id')
-
-        return json_response({"result": "Success", "statusCode": 0, 'authorization': user_id})
+        return json_response({"status": "Success", "authorization": user_id})
 
     async def get_user_info(self, request):
-        body = await decode_request(request)
-        required_fields = ['id']
-        await validate_fields(required_fields, body)
         try:
             id = request.rel_url.query['id']
         except:
@@ -98,10 +92,10 @@ class RouterHandler(object):
         user_id = body.get('id')
         username = body.get('username')
         email = body.get('email')
-
         await _redis.cache_set_user(user_id, username, email)
+
         return json_response({
-            "status": "Saved in redis",
+            "status": "Success",
             "id": user_id
         })
 

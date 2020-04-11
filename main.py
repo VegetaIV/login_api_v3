@@ -15,7 +15,7 @@ def parse_args(args):
     parser.add_argument(
         '-B', '--bind',
         help='identify host and port for api to run on',
-        default='localhost:8000')
+        default='localhost:8096')
     parser.add_argument(
         '-v', '--verbose',
         action='count',
