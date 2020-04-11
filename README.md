@@ -6,7 +6,7 @@ https://www.getpostman.com/collections/4d29af1b8d52cc9fbfd1
 
 #2 Terminal1: Run redis-server
 
-#3 Terminal2: Run server.py
+#3 Terminal2: Run main.py
 
 #4 Test api trong postman
 
